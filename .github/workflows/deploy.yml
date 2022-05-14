@@ -6,8 +6,17 @@ on:
       - main
 
 jobs:
-  create_test:
+  deploy:
     runs-on: ubuntu-20.04
     steps:
-      - name: crear carpeta de test
-        run: mkdir test
+      - name: create test
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          key: ${{ secrets.KEY }}
+          username: ${{ secrets.USERNAME }}
+        
+          script: |
+            mkdir test
+
+    
