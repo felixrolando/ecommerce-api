@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: create test
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: echo ${{secrets.SSH_HOST}}
-        
-          script: |
-            mkdir test
+        run: echo ${{secrets.SSH_HOST}} 
 
     
