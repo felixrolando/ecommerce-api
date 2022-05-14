@@ -7,7 +7,7 @@ on:
 
 jobs:
   create_test:
-    runs-on: ubuntu-20.04.4
+    runs-on: ubuntu-20.04
     steps:
       - name: crear carpeta de test
         run: mkdir test
