@@ -1,0 +1,13 @@
+name: Deploy ecommerce api
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create_test:
+    runs-on: ubuntu-20.04.4
+    steps:
+      - name: crear carpeta de test
+        run: mkdir test
