@@ -1,4 +1,4 @@
-name: Deploy ecommerce
+name: Deploy ecommerce v1
 
 on:
   push:
@@ -15,7 +15,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
 
           script: |
             mkdir test
