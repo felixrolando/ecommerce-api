@@ -23,9 +23,6 @@ jobs:
     needs: [build]
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ github.token }}
       - name: create folder test
         uses: appleboy/ssh-action@v0.1.4
         with:
