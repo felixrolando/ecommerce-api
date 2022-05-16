@@ -14,7 +14,7 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         
-          script: |
-            mkdir test
+      - name: Create folder test
+        run: mkdir test
 
     
