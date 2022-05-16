@@ -10,10 +10,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: create test
-        uses: digitalocean/action-doctl@v2
+        uses: appleboy/ssh-action@master
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - name: Create folder test
-        run: mkdir test
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
 
-    
+        script: |
+          mkdir test
