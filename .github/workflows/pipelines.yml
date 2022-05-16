@@ -1,0 +1,38 @@
+name: Deploy ecommerce v1
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Install yarn
+      run: yarn
+    - name: compile yarn with typescript
+      run: yarn run build
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: create test
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+
+          script: |
+            mkdir test
+            cd test
+            git clone git@github.com:felixrolando/ecommerce-api.git
+            yarn
+            yarn run build
