@@ -6,6 +6,19 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Install yarn
+      run: yarn
+    - name: running test with jest
+      run: yarn run test
+
   build:
     runs-on: ubuntu-20.04
     steps:
@@ -18,7 +31,7 @@ jobs:
       run: yarn
     - name: compile yarn with typescript
       run: yarn run build
-
+  
   deploy:
     needs: [build]
     runs-on: ubuntu-20.04
