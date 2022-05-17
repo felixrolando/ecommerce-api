@@ -1,8 +1,12 @@
+import dotenv from 'dotenv'
 import app from './app'
-import dotenv from 'dotenv';
-dotenv.config();
+
+const NODE_ENV = process.env.NODE_ENV || 'development'
+
+dotenv.config({ path: `.env.${NODE_ENV}` });
+
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
-  console.log(`${process.env.PORT}`)
+  console.log(`${process.env.HOST}`)
 })

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts",
+    "dev": "export NODE_ENV=development && ts-node-dev src/index.ts",
+    "prod": "export NODE_ENV=production && ts-node-dev src/index.ts",
+    "start": "export NODE_ENV=local && ts-node-dev src/index.ts",
     "lint": "ts-standard",
     "build": "tsc",
     "test": "jest"
