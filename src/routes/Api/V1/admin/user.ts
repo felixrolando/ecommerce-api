@@ -1,9 +1,9 @@
 import express from 'express'
 import Container from 'typedi'
-import userController from '../../../../controllers/userController'
+import UserController from '../../../../controllers/UserController'
 
 const router = express.Router()
-const user = Container.get(userController)
+const user = Container.get(UserController)
 
 router.post('/user', (req, res) => user.createUser(req, res))
 

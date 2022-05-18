@@ -1,10 +1,10 @@
 import { Service } from 'typedi'
 
 @Service()
-class CreateUserService {
+class CreateProductService {
   execute (): any {
     console.log('felix createUserService')
   }
 }
 
-export default CreateUserService
+export default CreateProductService

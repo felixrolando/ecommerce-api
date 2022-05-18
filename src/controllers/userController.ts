@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
 import { Service } from 'typedi'
-import CreateUserService from '../services/user/createUserService'
+import CreateUserService from '../services/user/CreateUserService'
 
 @Service()
-class userController {
+class UserController {
   constructor (private readonly createUserService: CreateUserService) { }
   createUser (req: Request, res: Response): Response {
     this.createUserService.execute()
@@ -11,4 +11,4 @@ class userController {
   }
 }
 
-export default userController
+export default UserController

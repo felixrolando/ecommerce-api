@@ -6,7 +6,6 @@ export function validateRequestQuery (schema: AnyZodObject): any {
     propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
-
     const originalMethod = descriptor.value
     descriptor.value = function (...args: any) {
       const request = args[0] as Request
