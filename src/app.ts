@@ -6,7 +6,6 @@ import routersV1 from './routes/Api/V1/index'
 const app: Application = express()
 
 const NODE_ENV = process.env.NODE_ENV === undefined ? 'development' : process.env.NODE_ENV
-
 dotenv.config({ path: `.env.${NODE_ENV}` })
 
 app.use(express.json())
@@ -17,7 +16,11 @@ app.get('/', (req, res) => {
 
 app.use('/api/admin/v1/', routersV1)
 
-connect(`${process.env.MONGO_URI}`)
-  .then(res => console.log('database'))
+run().catch(err => console.log(err))
+
+// connect database
+async function run (): Promise<void> {
+  await connect(`${process.env.MONGO_URI}`)
+}
 
 export default app
