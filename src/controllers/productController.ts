@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
 
-export const getProducts = (req: Request, res: Response): void => {
-  res.send('get products felix')
+export const getProducts = (req: Request, res: Response): Response => {
+  return res.json({ message: 'get products' })
 }
 
-export const saveProducts = (req: Request, res: Response): void => {
-  res.send('save products')
+export const saveProducts = (req: Request, res: Response): Response => {
+  return res.json({ message: 'save products' })
 }
