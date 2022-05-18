@@ -1,9 +1,13 @@
 import { Request, Response } from 'express'
 
-export const getProducts = (req: Request, res: Response): Response => {
-  return res.json({ message: 'get products' })
+class ProductController {
+  getProducts (req: Request, res: Response): Response {
+    return res.json({ message: req.query })
+  }
+
+  saveProducts = (req: Request, res: Response): Response => {
+    return res.json({ message: 'save products' })
+  }
 }
 
-export const saveProducts = (req: Request, res: Response): Response => {
-  return res.json({ message: 'save products' })
-}
+export default new ProductController()

@@ -1,7 +1,7 @@
 namespace NodeJS {
-    interface ProcessEnv {
-        PORT: number;
-        MONGO_URI: string;
-        HOST: string;
-    }
+  interface ProcessEnv {
+    PORT: number
+    MONGO_URI: string
+    HOST: string
+  }
 }

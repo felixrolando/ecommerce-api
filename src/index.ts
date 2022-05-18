@@ -3,7 +3,7 @@ import app from './app'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 
-dotenv.config({ path: `.env.${NODE_ENV}` });
+dotenv.config({ path: `.env.${NODE_ENV}` })
 
 const PORT = process.env.PORT || 3000
 
