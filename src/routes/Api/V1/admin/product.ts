@@ -1,9 +1,11 @@
 import express from 'express'
-import ProductController from '../../../../controllers/productController'
+import Container from 'typedi'
+import productController from '../../../../controllers/productController'
 
 const router = express.Router()
+const product = Container.get(productController)
 
-router.get('/product', ProductController.getProducts)
-router.post('/product', ProductController.saveProducts)
+router.get('/product', (req, res) => product.getProducts(req, res))
+router.post('/product', (req, res) => product.saveProducts(req, res))
 
 export default router

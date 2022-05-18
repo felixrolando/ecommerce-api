@@ -1,16 +1,18 @@
 import { Request, Response } from 'express'
+import { Service } from 'typedi'
 import { loginUserValidator } from '../validator/user/userValidators'
 import { validateRequestFactory } from '../validator/validateRequestFactory'
- 
+
+@Service()
 class ProductController {
   @validateRequestFactory(loginUserValidator)
-  getProducts(req: Request, res: Response): Response {
+  getProducts (req: Request, res: Response): Response {
     return res.json({ message: req.query })
   }
 
-  saveProducts(req: Request, res: Response): Response{
+  saveProducts (req: Request, res: Response): Response {
     return res.json({ message: 'save products' })
   }
 }
 
-export default new ProductController()
+export default ProductController
