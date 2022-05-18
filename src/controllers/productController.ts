@@ -4,7 +4,7 @@ import { validateRequestFactory } from '../validator/validateRequestFactory'
 
 class ProductController {
   @validateRequestFactory(loginUserValidator)
-  getProducts(req: Request, res: Response): Response {
+  getProducts = (req: Request, res: Response): Response => {
     return res.json({ message: req.query })
   }
 

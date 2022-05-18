@@ -4,10 +4,9 @@ import { validateRequestBody } from './validateRequestBody'
 
 type Tvalidate = 'query' | 'body'
 
-export function validateRequestFactory(schema: AnyZodObject, prop: Tvalidate = 'query') {
-
-    if (prop === 'query') {
-        return validateRequestQuery(schema);
-    }
-    return validateRequestBody(schema);
+export function validateRequestFactory (schema: AnyZodObject, prop: Tvalidate = 'query'): Function {
+  if (prop === 'query') {
+    return validateRequestQuery(schema)
+  }
+  return validateRequestBody(schema)
 }

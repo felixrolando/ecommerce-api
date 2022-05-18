@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { AnyZodObject } from 'zod'
-export function validateRequestQuery(schema: AnyZodObject): any {
+export function validateRequestQuery (schema: AnyZodObject): any {
   return (
     target: Object,
     propertyKey: string,
