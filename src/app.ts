@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/admin/v1/', routersV1)
 
-run().catch(err => console.log(err))
+run().then(() => console.log('Database connected!')).catch(err => console.log(err))
 
 // connect database
 async function run (): Promise<void> {
