@@ -1,6 +1,6 @@
 import express from 'express'
-import productRouter from './admin/product'
-import userRouter from './admin/user'
+import productRouter from './admin/product.routes'
+import userRouter from './admin/user.routes'
 
 const indexRouterV1 = express.Router()
 
