@@ -1,9 +1,9 @@
 import { Service } from 'typedi'
-import UserModel from '../../models/user'
+import UserModel from '../../models/mongo/user.model'
 
 @Service()
 class CreateUserService {
-  async execute (): Promise<any> {
+  async execute(): Promise<any> {
     console.log('felix createUserService')
     const user = new UserModel({
       name: 'Bill',
