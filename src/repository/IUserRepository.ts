@@ -1,5 +1,5 @@
-import { IUser } from "../interface/IUser";
+import { IUser } from '../interface/IUser'
 
-interface IUserRepository {
-    Save(user: IUser): IUser
+export interface IUserRepository {
+  save: (data: IUser) => Promise<IUser>
 }

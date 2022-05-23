@@ -1,16 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { IUser } from '../../interface/IUser'
 
 @Entity({ name: 'users' })
-export class User {
-    @PrimaryGeneratedColumn('uuid')
-    id: string
+export class User implements IUser {
+  @PrimaryGeneratedColumn()
+  id: string
 
-    @Column()
-    firstName: string
+  @Column()
+  name: string
 
-    @Column()
-    lastName: string
+  @Column()
+  email: string
 
-    @Column({ type: 'varchar' })
-    age: number
+  @Column()
+  avatar: string
+
+  @Column()
+  phone: string
+
+  @Column()
+  customerId: number
 }

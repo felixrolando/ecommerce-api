@@ -6,9 +6,9 @@ const router = Router()
 const product = Container.get(ProductController)
 
 router
-    .route('/admin/product')
-    .get((req, res) => product.getProducts(req, res))
-    .post((req, res) => product.saveProducts(req, res))
+  .route('/admin/product')
+  .get((req, res) => product.getProducts(req, res))
+  .post((req, res) => product.saveProducts(req, res))
 
 // router.get('/product', (req, res) => product.getProducts(req, res))
 // router.post('/product', (req, res) => product.saveProducts(req, res))

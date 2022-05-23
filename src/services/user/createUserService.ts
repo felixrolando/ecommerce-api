@@ -1,16 +1,17 @@
 import { Service } from 'typedi'
-import UserModel from '../../models/mongo/user.model'
+import { IUser } from '../../interface/IUser'
+import { IUserRepository } from '../../repository/IUserRepository'
+import UserRepository from '../../repository/mysql/UserRepository'
 
 @Service()
 class CreateUserService {
-  async execute(): Promise<any> {
-    console.log('felix createUserService')
-    const user = new UserModel({
-      name: 'Bill',
-      email: 'bill@initech.com',
-      avatar: 'https://i.imgur.com/dM7Thhn.png'
-    })
-    await user.save()
+  private readonly userRepository: IUserRepository
+  constructor (userRepository: UserRepository) {
+    this.userRepository = userRepository
+  }
+
+  async execute (user: IUser): Promise<IUser> {
+    return await this.userRepository.save(user)
   }
 }
 
