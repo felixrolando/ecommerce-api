@@ -8,7 +8,7 @@ import { IUserRepository } from '../IUserRepository'
 class UserRepository implements IUserRepository {
   private readonly userRepository = AppDataSource.getRepository(User)
 
-  async save (data: IUser): Promise<IUser> {
+  async save(data: IUser): Promise<IUser> {
     return this.userRepository.create(data)
   }
 }

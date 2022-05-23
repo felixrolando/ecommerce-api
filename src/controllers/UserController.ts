@@ -1,17 +1,17 @@
 import { Request, Response } from 'express'
 import { Service } from 'typedi'
-import CreateUserService from '../services/user/CreateUserService'
+import { CreateUserService } from '../services/user/CreateUserService'
 
 @Service()
 export class UserController {
-  constructor (private readonly createUserService: CreateUserService) { }
+  constructor(private readonly createUserService: CreateUserService) { }
 
-  createUser (request: Request, response: Response): Response {
+  createUser(req: Request, res: Response): Response {
     try {
-      this.createUserService.execute({ email: 'dfdf', name: 'dsfsd', avatar: 'sdf', customerId: 5, phone: 'sdf' })
+      this.createUserService.execute({ email: 'roland@hot', name: 'felix', avatar: 'photo', customerId: 5, phone: '809' })
     } catch (error) {
       console.log(error)
     }
-    return response.send('Hello response!')
+    return res.send('Hello response!')
   }
 }
