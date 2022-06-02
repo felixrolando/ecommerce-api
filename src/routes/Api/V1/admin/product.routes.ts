@@ -10,7 +10,4 @@ router
   .get((req, res) => product.getProducts(req, res))
   .post((req, res) => product.saveProducts(req, res))
 
-// router.get('/product', (req, res) => product.getProducts(req, res))
-// router.post('/product', (req, res) => product.saveProducts(req, res))
-
 export default router

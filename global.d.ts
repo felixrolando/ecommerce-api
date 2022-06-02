@@ -8,5 +8,6 @@ namespace NodeJS {
     DB_NAME: string
     DB_PORT: number
     HOST: string
+    SOCKET_PORT: number
   }
 }
