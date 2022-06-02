@@ -2,8 +2,6 @@ import { Service } from 'typedi'
 import { IUser } from '../../interface/IUser'
 import { IUserRepository } from '../../repository/IUserRepository'
 import UserRepository from '../../repository/mongo/UserRepository'
-//import UserRepository from '../../repository/mysql/UserRepository'
-
 
 @Service()
 export class CreateUserService {
