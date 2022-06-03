@@ -13,8 +13,6 @@ export class UserController {
     return res.send('Hello response!')
   }
   get(req: Request, res: Response): Response {
-    const event = req.app.get('eventEmitter');
-    event.emit('USER_CREATED', {})
     return res.send('Hello response get!')
   }
 }
