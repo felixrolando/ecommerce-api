@@ -20,7 +20,7 @@ export class CreateNotificationService {
             title: 'title'
 
         }
-        console.log('listener notification')
+        console.log('listener  asdadasdasd')
 
         return await this.notificationRepository.save(data)
     }
