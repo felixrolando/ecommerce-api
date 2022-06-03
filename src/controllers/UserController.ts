@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { Service } from 'typedi'
-import { WebSocketEvents, WebSocket } from '../helpers/WebSocket'
 import { CreateUserService } from '../services/user/CreateUserService'
 import { registerUserValidator } from '../validator/user/userValidators'
 import { validateRequestFactory } from '../validator/validateRequestFactory'
@@ -14,8 +13,8 @@ export class UserController {
     return res.send('Hello response!')
   }
   get(req: Request, res: Response): Response {
-    const socket = WebSocket.getInstance();
-    socket.sendEventByUserId('2', WebSocketEvents.Notification, 'hola como estas')
+    const event = req.app.get('eventEmitter');
+    event.emit('USER_CREATED', {})
     return res.send('Hello response get!')
   }
 }

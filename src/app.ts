@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import { connect } from 'mongoose'
 import express, { Application } from 'express'
 import { createServer } from 'http'
-
+import Events from './helpers/Events'
 import routersV1 from './routes/Api/V1/index'
 import { WebSocket, WebSocketEvents } from './helpers/WebSocket'
 import { IActivityLog } from './interface/IActivityLog'
@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/V1', routersV1)
+app.set('eventEmitter', Events);
 
 // connect database
 run().then(() => console.log('Database connected!')).catch(err => console.log(err))

@@ -1,7 +1,7 @@
 import { Server } from "socket.io"
 import { IWebSocket } from "../interface/IWebSocket";
 
-export enum WebSocketEvents {
+export const enum WebSocketEvents {
     Notification = 'Notification',
     ActivityLog = 'ActivityLog'
 }
@@ -20,7 +20,7 @@ export class WebSocket extends Server implements IWebSocket {
     }
 
     sendEventByUserId(userId: string, event: WebSocketEvents, data: any) {
-        this.sockets.to(userId).emit(event, data)
+        this.sockets.emit(event, data)
     }
 
     getEventByUserId() {
