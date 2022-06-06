@@ -1,12 +1,14 @@
 import { Schema, model } from 'mongoose'
-import { IUser } from '../../interface/IUser'
+import { IActivityLog } from '../../interface/IActivityLog'
 
-const userSchema = new Schema<IUser>({
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    avatar: { type: String, required: false },
-    phone: { type: String, required: false },
-    customerId: { type: Number, required: false }
+const activityLogSchema = new Schema<IActivityLog>({
+    context: { type: String, required: true },
+    data: { type: Array, required: true },
+    function: { type: String, required: true },
+    date: { type: Date, required: true },
+    action: { type: String, enum: ['search', 'add', 'edit', 'delete'], required: true },
+    from: { type: String, enum: ['server', 'client'], required: true },
+    serverResponse: { type: String, enum: ['server', 'client'], required: false }
 })
 
-export default model<IUser>('Users', userSchema)
+export default model<IActivityLog>('ActivityLogs', activityLogSchema)

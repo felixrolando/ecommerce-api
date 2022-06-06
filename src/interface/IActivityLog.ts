@@ -4,5 +4,6 @@ export interface IActivityLog {
     function: string;
     date: Date;
     action: 'search' | 'add' | 'edit' | 'delete';
-    serverResponse: any;
+    from: 'server' | 'client'
+    serverResponse?: any;
 }

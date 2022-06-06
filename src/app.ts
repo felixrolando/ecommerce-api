@@ -4,7 +4,7 @@ import { connect } from 'mongoose'
 import express, { Application } from 'express'
 import { createServer } from 'http'
 import routersV1 from './routes/Api/V1/index'
-import { WebSocket, WebSocketEvents } from './helpers/WebSocket'
+import { WebSocket, WebSocketEvents } from './webSocket/WebSocket'
 import { IActivityLog } from './interface/IActivityLog'
 
 const NODE_ENV = process.env.NODE_ENV === undefined ? 'development' : process.env.NODE_ENV
