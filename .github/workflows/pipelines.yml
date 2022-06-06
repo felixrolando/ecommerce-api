@@ -3,7 +3,7 @@ name: Deploy ecommerce v1
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   test:
