@@ -35,5 +35,4 @@ async function run(): Promise<void> {
   await connect(`${process.env.MONGO_URI}`)
 }
 
-
 export default httpServer
