@@ -7,6 +7,15 @@ class HttpTest extends HttpInstance {
         return await this.get('todos/1')
     }
 
+    async getData404() {
+        try {
+            return await this.get('test/1')
+        } catch (error: any) {
+            return error.response
+        }
+    }
+
+
     async postData(): Promise<any> {
         const mockData = JSON.stringify({
             title: 'foo',
@@ -66,3 +75,10 @@ describe('Testing http instance method DELETE', () => {
     })
 })
 
+
+describe('Testing http instance return 404', () => {
+    it('MOCK API Request 404', async () => {
+        const result = await http.getData404()
+        expect(result.status).toEqual(404)
+    })
+})

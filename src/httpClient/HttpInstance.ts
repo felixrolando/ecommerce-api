@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
 enum StatusCode {
     Unauthorized = 401,
@@ -15,21 +15,6 @@ const headers: Readonly<Record<string, string | boolean>> = {
 };
 
 
-const injectToken = (config: AxiosRequestConfig): AxiosRequestConfig => {
-    try {
-        const token = null; //localStorage.getItem("accessToken");
-
-        if (token != null) {
-            if (config.headers) {
-                config.headers.Authorization = `Bearer ${token}`;
-            }
-        }
-        return config;
-    } catch (error: any) {
-        throw new Error(error);
-    }
-};
-
 export abstract class HttpInstance {
     private instance: AxiosInstance;
 
@@ -44,23 +29,37 @@ export abstract class HttpInstance {
             withCredentials: true,
         });
 
-        http.interceptors.request.use(injectToken, (error) => Promise.reject(error));
+        http.interceptors.request.use(this.request, this.requestError);
+        http.interceptors.response.use(this.response, this.responseError);
 
-        http.interceptors.response.use(
-            (response) => response,
-            (error) => {
-                const { response } = error;
-                return this.handleError(response);
-            }
-        );
-
-        this.instance = http;
         return http;
     }
 
-    protected request<T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> {
-        return this.httpInstance.request(config);
+    private request(config: AxiosRequestConfig): AxiosRequestConfig {
+        const token = null;
+        if (token != null) {
+            if (config.headers) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+        }
+        return config;
     }
+
+    private requestError = (error: AxiosError): Promise<AxiosError> => {
+        return Promise.reject(error);
+    }
+
+    private response(response: AxiosResponse): AxiosResponse {
+        return response
+    }
+
+    private responseError(error: AxiosError): Promise<AxiosError> {
+        return Promise.reject(error);
+    }
+
+    // protected request<T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> {
+    //     return this.httpInstance.request(config);
+    // }
 
     protected get<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
         return this.httpInstance.get<T, R>(url, config);
@@ -86,28 +85,28 @@ export abstract class HttpInstance {
         return this.httpInstance.delete<T, R>(url, config);
     }
 
-    private handleError(error: any) {
-        const { status } = error;
+    // private handleError(error: any): Promise<AxiosError> {
+    //     const { status } = error;
 
-        switch (status) {
-            case StatusCode.InternalServerError: {
-                // Handle InternalServerError
-                break;
-            }
-            case StatusCode.Forbidden: {
-                // Handle Forbidden
-                break;
-            }
-            case StatusCode.Unauthorized: {
-                // Handle Unauthorized
-                break;
-            }
-            case StatusCode.TooManyRequests: {
-                // Handle TooManyRequests
-                break;
-            }
-        }
+    //     switch (status) {
+    //         case StatusCode.InternalServerError: {
+    //             // Handle InternalServerError
+    //             break;
+    //         }
+    //         case StatusCode.Forbidden: {
+    //             // Handle Forbidden
+    //             break;
+    //         }
+    //         case StatusCode.Unauthorized: {
+    //             // Handle Unauthorized
+    //             break;
+    //         }
+    //         case StatusCode.TooManyRequests: {
+    //             // Handle TooManyRequests
+    //             break;
+    //         }
+    //     }
 
-        return Promise.reject(error);
-    }
+    //     return Promise.reject(error);
+    // }
 }
