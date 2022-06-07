@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import Container from 'typedi'
-import ProductController from '../../../../controllers/products.controller'
+import ProductController from '../../../../controllers/ProductController'
 
 const router = Router()
 const product = Container.get(ProductController)

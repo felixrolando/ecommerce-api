@@ -9,5 +9,6 @@ namespace NodeJS {
     DB_PORT: number
     HOST: string
     SOCKET_PORT: number
+    ERP_URI: string
   }
 }
