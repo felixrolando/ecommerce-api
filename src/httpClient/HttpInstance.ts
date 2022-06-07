@@ -1,20 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
-enum StatusCode {
-    Unauthorized = 401,
-    Forbidden = 403,
-    TooManyRequests = 429,
-    InternalServerError = 500,
-}
-
-const headers: Readonly<Record<string, string | boolean>> = {
-    Accept: "application/json",
-    "Content-Type": "application/json; charset=utf-8",
-    "Access-Control-Allow-Credentials": true,
-    "X-Requested-With": "XMLHttpRequest",
-};
-
-
 export abstract class HttpInstance {
     private instance: AxiosInstance;
 
@@ -23,6 +8,7 @@ export abstract class HttpInstance {
     }
 
     private initHttp() {
+        const headers = this.headers();
         const http = axios.create({
             baseURL: process.env.ERP_URI,
             headers,
@@ -33,6 +19,16 @@ export abstract class HttpInstance {
         http.interceptors.response.use(this.response, this.responseError);
 
         return http;
+    }
+
+    private headers() {
+        const headers: Readonly<Record<string, string | boolean>> = {
+            Accept: "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            "Access-Control-Allow-Credentials": true,
+            "X-Requested-With": "XMLHttpRequest",
+        };
+        return headers
     }
 
     private request(config: AxiosRequestConfig): AxiosRequestConfig {
@@ -56,10 +52,6 @@ export abstract class HttpInstance {
     private responseError(error: AxiosError): Promise<AxiosError> {
         return Promise.reject(error);
     }
-
-    // protected request<T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> {
-    //     return this.httpInstance.request(config);
-    // }
 
     protected get<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
         return this.httpInstance.get<T, R>(url, config);
@@ -85,28 +77,4 @@ export abstract class HttpInstance {
         return this.httpInstance.delete<T, R>(url, config);
     }
 
-    // private handleError(error: any): Promise<AxiosError> {
-    //     const { status } = error;
-
-    //     switch (status) {
-    //         case StatusCode.InternalServerError: {
-    //             // Handle InternalServerError
-    //             break;
-    //         }
-    //         case StatusCode.Forbidden: {
-    //             // Handle Forbidden
-    //             break;
-    //         }
-    //         case StatusCode.Unauthorized: {
-    //             // Handle Unauthorized
-    //             break;
-    //         }
-    //         case StatusCode.TooManyRequests: {
-    //             // Handle TooManyRequests
-    //             break;
-    //         }
-    //     }
-
-    //     return Promise.reject(error);
-    // }
 }
