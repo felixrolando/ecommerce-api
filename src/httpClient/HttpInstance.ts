@@ -1,9 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
-export abstract class HttpInstance {
+class HttpInstance {
     private instance: AxiosInstance;
 
-    private get httpInstance(): AxiosInstance {
+    private get getInstance(): AxiosInstance {
         return this.instance != null ? this.instance : this.initHttp();
     }
 
@@ -32,7 +32,7 @@ export abstract class HttpInstance {
     }
 
     private request(config: AxiosRequestConfig): AxiosRequestConfig {
-        const token = null;
+        const token = process.env.ERP_TOKEN;
         if (token != null) {
             if (config.headers) {
                 config.headers.Authorization = `Bearer ${token}`;
@@ -46,35 +46,44 @@ export abstract class HttpInstance {
     }
 
     private response(response: AxiosResponse): AxiosResponse {
-        return response
+        return response.data
     }
 
     private responseError(error: AxiosError): Promise<AxiosError> {
         return Promise.reject(error);
     }
 
-    protected get<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
-        return this.httpInstance.get<T, R>(url, config);
+    public get<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
+        return this.getInstance.get<T, R>(url, config);
     }
 
-    protected post<T = any, R = AxiosResponse<T>>(
+    public post<T = any, R = AxiosResponse<T>>(
         url: string,
         data?: T,
         config?: AxiosRequestConfig
     ): Promise<R> {
-        return this.httpInstance.post<T, R>(url, data, config);
+        return this.getInstance.post<T, R>(url, data, config);
     }
 
-    protected put<T = any, R = AxiosResponse<T>>(
+    public put<T = any, R = AxiosResponse<T>>(
         url: string,
         data?: T,
         config?: AxiosRequestConfig
     ): Promise<R> {
-        return this.httpInstance.put<T, R>(url, data, config);
+        return this.getInstance.put<T, R>(url, data, config);
     }
 
-    protected delete<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
-        return this.httpInstance.delete<T, R>(url, config);
+    public delete<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
+        return this.getInstance.delete<T, R>(url, config);
+    }
+
+    public getErrorData(error: AxiosError): AxiosResponse | any {
+        if (error.response) {
+            return error.response
+        }
+
     }
 
 }
+
+export default new HttpInstance();

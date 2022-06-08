@@ -8,6 +8,6 @@ const notificationSchema = new Schema<INotification>({
     msg: { type: String, required: true },
     status: { type: String, required: true },
     title: { type: String, required: true }
-})
+}, { timestamps: true })
 
 export default model<INotification>('Notifications', notificationSchema)

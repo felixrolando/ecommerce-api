@@ -7,6 +7,6 @@ const userSchema = new Schema<IUser>({
   avatar: { type: String, required: false },
   phone: { type: String, required: false },
   customerId: { type: Number, required: false }
-})
+}, { timestamps: true })
 
 export default model<IUser>('Users', userSchema)

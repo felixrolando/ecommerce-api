@@ -9,6 +9,6 @@ const activityLogSchema = new Schema<IActivityLog>({
     action: { type: String, enum: ['search', 'add', 'edit', 'delete'], required: true },
     from: { type: String, enum: ['server', 'client'], required: true },
     serverResponse: { type: String, enum: ['server', 'client'], required: false }
-})
+}, { timestamps: true })
 
 export default model<IActivityLog>('ActivityLogs', activityLogSchema)

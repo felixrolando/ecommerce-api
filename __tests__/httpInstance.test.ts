@@ -1,15 +1,15 @@
-import { HttpInstance } from '../src/httpClient/HttpInstance'
+import httpInstance from '../src/httpClient/HttpInstance'
 
 process.env.ERP_URI = 'https://jsonplaceholder.typicode.com/'
 
-class HttpTest extends HttpInstance {
+class HttpTest {
     async getData() {
-        return await this.get('todos/1')
+        return await httpInstance.get('todos/1')
     }
 
     async getData404() {
         try {
-            return await this.get('test/1')
+            return await httpInstance.get('test/1')
         } catch (error: any) {
             return error.response
         }
@@ -22,7 +22,7 @@ class HttpTest extends HttpInstance {
             body: 'bar',
             userId: 1,
         })
-        return await this.post('posts', mockData)
+        return await httpInstance.post('posts', mockData)
     }
 
     async putData(): Promise<any> {
@@ -32,11 +32,11 @@ class HttpTest extends HttpInstance {
             body: 'bar',
             userId: 1,
         })
-        return await this.put('posts/1', mockData)
+        return await httpInstance.put('posts/1', mockData)
     }
 
     async deleteData(): Promise<any> {
-        return await this.delete('posts/1')
+        return await httpInstance.delete('posts/1')
     }
 }
 

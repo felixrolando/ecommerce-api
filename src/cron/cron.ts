@@ -1,13 +1,15 @@
 import cron from 'node-cron';
-import BrandService from '../httpClient/services/BrandService';
+import { Container } from "typedi";
+import { CreateBrandCommand } from './Commands/CreateBrandCommand';
 import { EVERY_30_SECONDS } from './scheduleConstants';
 
+const createBrandCommand = Container.get(CreateBrandCommand)
+
 export default () => {
-    cron.schedule(EVERY_30_SECONDS, function () {
+    cron.schedule(EVERY_30_SECONDS, async () => {
         console.log('running a task EVERY_30_SECONDS');
-        BrandService.getAllBrands().then(response => {
-            console.log(response.data)
-        })
+        await createBrandCommand.handle()
+
     }
         // , {
         //     scheduled: true,

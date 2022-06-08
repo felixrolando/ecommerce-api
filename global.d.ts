@@ -10,5 +10,8 @@ namespace NodeJS {
     HOST: string
     SOCKET_PORT: number
     ERP_URI: string
+    BUSINESS_INTEGRATION_ID: number
+    USER_INTEGRATION_ID: number
+    ERP_TOKEN: string
   }
 }
