@@ -4,4 +4,6 @@ export interface IUser {
   avatar?: string
   phone?: string
   customerId?: number
+  password: string
+  token: string
 }
