@@ -5,12 +5,8 @@ import { IUserRepository } from '../IUserRepository'
 
 @Service()
 class UserRepository implements IUserRepository {
-  async save (data: IUser): Promise<IUser> {
-    const user = new UserModel({
-      name: data.name,
-      email: data.email,
-      avatar: data.avatar
-    })
+  async save(data: IUser): Promise<IUser> {
+    const user = new UserModel(data)
     await user.save()
     return user
   }

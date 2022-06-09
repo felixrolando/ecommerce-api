@@ -1,14 +1,11 @@
 import 'reflect-metadata'
-import dotenv from 'dotenv'
+import './loadEnv'
 import { connect } from 'mongoose'
 import express, { Application } from 'express'
 import { createServer } from 'http'
 import routersV1 from './routes/Api/V1/index'
 import { WebSocket, WebSocketEvents } from './webSocket/WebSocket'
 import { IActivityLog } from './interface/IActivityLog'
-
-const NODE_ENV = process.env.NODE_ENV === undefined ? 'development' : process.env.NODE_ENV
-dotenv.config({ path: `.env.${NODE_ENV}` })
 
 const app: Application = express()
 const httpServer = createServer(app)

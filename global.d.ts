@@ -13,5 +13,14 @@ namespace NodeJS {
     BUSINESS_INTEGRATION_ID: number
     USER_INTEGRATION_ID: number
     ERP_TOKEN: string
+    JWT_TOKEN_SECRET: string
   }
 }
+
+
+namespace Express {
+  interface Request {
+    user_id: any;
+  }
+}
+

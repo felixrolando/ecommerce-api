@@ -1,23 +1,31 @@
-import { Request, Response } from 'express'
-import { Service } from 'typedi'
-import { ActivityLogHelper } from '../helpers/ActivityLogHelper'
-import { CreateUserService } from '../services/user/CreateUserService'
-import { registerUserValidator } from '../validator/user/userValidators'
-import { validateRequestFactory } from '../validator/validateRequestFactory'
+import { Request, Response } from "express";
+import { Service } from "typedi";
+import { ActivityLogHelper } from "../helpers/ActivityLogHelper";
+import { CreateUserService } from "../services/user/CreateUserService";
+import { registerUserValidator } from "../validator/user/userValidators";
+import { validateRequestFactory } from "../validator/validateRequestFactory";
 
 @Service()
 export class UserController {
   constructor(private readonly createUserService: CreateUserService) { }
   @validateRequestFactory(registerUserValidator)
-  createUser(req: Request, res: Response): Response {
-    this.createUserService.execute({ email: 'roland@hot', name: 'felix', avatar: 'photo', customerId: 5, phone: '809' })
-      .then(response => {
-        ActivityLogHelper.logServerEmit('UserController', 'createUser', 'add', response)
-      })
-
-    return res.send('Hello response!')
+  async createUser(req: Request, res: Response): Promise<Response> {
+    const { user, password, name, email }: any = req.query;
+    const userCreated = await this.createUserService.execute({
+      email: email,
+      user: user,
+      name: name,
+      password: password,
+    });
+    ActivityLogHelper.logServerEmit(
+      "UserController",
+      "createUser",
+      "add",
+      user
+    );
+    return res.json(userCreated);
   }
   get(req: Request, res: Response): Response {
-    return res.send('Hello response get!')
+    return res.status(200).send("Welcome 🙌 ");
   }
 }
