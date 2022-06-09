@@ -15,9 +15,11 @@ export class CreateCategoryCommand implements ICommand {
         try {
             const response = await this.categoryService.getAllCategory()
 
-            response.data.map(async (data: ICategory) => {
-                await this.createCategoryService.execute(data)
-            })
+            console.log(response)
+
+            // response.map(async (data: ICategory) => {
+            //     await this.createCategoryService.execute(data)
+            // })
 
         } catch (error) {
             console.log(error)

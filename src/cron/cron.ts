@@ -19,14 +19,14 @@ export default () => {
         // }
     )
 
-    cron.schedule(EVERY_30_SECONDS, async () => {
-        console.log('running a task EVERY_30_SECONDS categorys');
-        await createCategoryCommand.handle()
+    // cron.schedule(EVERY_30_SECONDS, async () => {
+    //     console.log('running a task EVERY_30_SECONDS categorys');
+    //     await createCategoryCommand.handle()
 
-    }
-        // , {
-        //     scheduled: true,
-        //     timezone: 'America/Santo_Domingo'
-        // }
-    )
+    // }
+    //     // , {
+    //     //     scheduled: true,
+    //     //     timezone: 'America/Santo_Domingo'
+    //     // }
+    // )
 }

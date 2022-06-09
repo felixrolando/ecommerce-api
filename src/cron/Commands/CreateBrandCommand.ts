@@ -13,15 +13,12 @@ export class CreateBrandCommand implements ICommand {
 
     async handle(): Promise<void> {
         try {
-            const response = await this.brandService.getAllBrands()
-
-            response.data.map(async (data: IBrand) => {
-                await this.createBrandService.execute(data)
-            })
-
+            const { data } = await this.brandService.getAllBrands();
+            // response.map(async (data: IBrand) => {
+            //     await this.createBrandService.execute(data)
+            // })
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-
     }
 }
